@@ -1,66 +1,65 @@
 { config, pkgs, ... }:
 
-let
-  fishConfigPath = ".config/fish/config.fish";
-in {
+{
   home.packages = with pkgs; [
     eza       # ls replacement
     bat       # cat replacement
     fd        # find replacement
   ];
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
 
-  home.file.${fishConfigPath}.text = ''
-    ########################################
-    # Environment Variables
-    ########################################
-    set -gx EDITOR nvim
-    set -gx VISUAL nvim
-    set -gx PAGER less
-    set -gx BROWSER firefox
+    shellInit = ''
+      ########################################
+      # Environment Variables
+      ########################################
+      set -gx EDITOR nvim
+      set -gx VISUAL nvim
+      set -gx PAGER less
+      set -gx BROWSER firefox
 
-    ########################################
-    # Prompt (using starship)
-    ########################################
-    starship init fish | source
+      ########################################
+      # Prompt (using starship)
+      ########################################
+      starship init fish | source
 
-    ########################################
-    # Aliases
-    ########################################
-    alias ls="eza --icons"
-    alias cat="bat"
-    alias grep="grep --color=auto"
-    alias find="fd"
+      ########################################
+      # Pywal Colors
+      ########################################
+      if test -e ~/.cache/wal/colors.fish
+          source ~/.cache/wal/colors.fish
+      end
 
-    ########################################
-    # Pywal Colors
-    ########################################
-    if test -f ~/.cache/wal/colors.sh
-        source ~/.cache/wal/colors.sh
-    end
+      ########################################
+      # Startup Commands
+      ########################################
+      fish_vi_key_bindings
+      set -U fish_greeting ''
 
-    ########################################
-    # Functions
-    ########################################
-    function update-system
-      echo "Updating system..."
-      sudo nixos-rebuild switch --flake ~/nixos#$(hostname)
-    end
+      ########################################
+      # PATH Fixes
+      ########################################
+      set -U fish_user_paths $HOME/.local/bin $fish_user_paths
+    '';
 
-    function ll
-      eza -l --git
-    end
+    shellAliases = {
+      ls = "eza --icons";
+      cat = "bat";
+      grep = "grep --color=auto";
+      find = "fd";
+      hsm = "home-manager switch";
+    };
 
-    ########################################
-    # Startup Commands
-    ########################################
-    fish_vi_key_bindings
+    functions = {
+      update-system.body = ''
+        echo "Updating system..."
+        sudo nixos-rebuild switch --flake ~/nixos#(hostname)
+      '';
 
-    ########################################
-    # PATH Fixes
-    ########################################
-    set -U fish_user_paths $HOME/.local/bin $fish_user_paths
-
-  '';
+      ll.body = ''
+        eza -l --git
+      '';
+    };
+  };
 }
