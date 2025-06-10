@@ -12,151 +12,129 @@ in {
     ########################################
 
 format = """
-[░▒▓](#2e3440)\
-$os\
-$username\
-[](bg:#3b4252 fg:#2e3440)\
-$directory\
-[](fg:#3b4252 bg:#434c5e)\
-$git_branch\
-$git_status\
-[](fg:#434c5e bg:#4c566a)\
-$c\
-$python\
-$elixir\
-$elm\
-$golang\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$rust\
-$scala\
-[](fg:#4c566a bg:#5e81ac)\
-$docker_context\
-[](fg:#5e81ac bg:#6272a4)\
-$time\
-[ ](fg:#6272a4)\
-\n
-$cmd_duration\
-$character\
-"""
-#add_newline = false
+[╭─](color2)\
+    [【](color7)\
+      $username\
+      [@](color7)\
+      $hostname \
+      $directory\      
+    [】](color7)
+[│](color2)\
+    $git_branch\
+    $git_status\
+    $package\
+    $python\
+    $nodejs\    
+    $custom
+[╰─](color2)\
+    $memory_usage\
+    $time\
+    $cmd_duration\    
+    $shell"""
 
-[line_break]
+palette = "pywal"
+[palettes.pywal]
+color0="#0D0C0B"
+color1="#656555"
+color2="#5B5E61"
+color3="#5E6265"
+color4="#67696B"
+color5="#BA593C"
+color6="#907566"
+color7="#cebdac"
+color8="#908478"
+
+
+[memory_usage]
 disabled = false
+symbol = " "
+threshold = -1
+format = " [$symbol$ram](color1)"
+
 
 [username]
 show_always = true
-style_user = "bg:#2e3440"
-style_root = "bg:#9A348E"
-format = '[ $user ]($style)'
+format = "[$user](color1)"
+
+[hostname]
+ssh_only= false
+format = "[$hostname](color1)"
 disabled = false
 
-[os]
-style = "bg:#9A348E"
-disabled = true # Disabled by default
+[custom.docker]
+command = "echo '  '"
+files = ["Dockerfile", 'docker-compose.yml', "docker-compose.yaml"]
+when = """ comand -v docker &> /dev/null; exit (echo $?); """
+format = " [$output](color7)"
 
-[directory]
-style = "bg:#3b4252"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+[character]
+success_symbol = " [$shell\\$](color7)"
+error_symbol = " [$shell✖](color7)"
 
-[directory.substitutions]
-"Documents" = " "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+[shell]
+powershell_indicator = "_"
+bash_indicator = ""
+disabled= false
 
-[c]
-symbol = " "
-style = "bg:#4c566a"
-format = '[ $symbol ($version) ]($style)'
-
-[python]
-symbol = " "
-style = "bg:#4c566a"
-format = '[ $symbol ($version) ]($style)'
-
-[docker_context]
-symbol = " "
-style = "bg:#5e81ac"
-format = '[ $symbol $context ]($style) $path'
-
-[elixir]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[elm]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[git_branch]
-symbol = ""
-style = "bg:#434c5e"
-format = '[ $symbol $branch ]($style)'
-
-[git_status]
-style = "bg:#434c5e"
-format = '[$all_status$ahead_behind ]($style)'
-
-[golang]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[haskell]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[java]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[julia]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[nodejs]
-symbol = ""
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[nim]
-symbol = " "
-style = "bg:##434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[rust]
-symbol = ""
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
-
-[scala]
-symbol = " "
-style = "bg:#434c5e"
-format = '[ $symbol ($version) ]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#6272a4"
-format = '[  $time ]($style)'
-	
-[character]
-success_symbol = '[ ➜](#6272a4)'
-error_symbol = '[ ➜](bold red)'
-#style = "bg:#6272a4"
+time_format = "%T"
+format = "[ $time](color5)"
+use_12hr = true
+
+[directory]
+disabled = false
+read_only = " "
+truncation_length = 4
+truncate_to_repo = false
+format = "[$read_only](color4)[$path](color4) "
+home_symbol = ""
+
+# [directory.substitution]
+# "~" = ""
 
 [cmd_duration]
-min_time = 500
-format = ' [$duration](#6272a4)'
+disabled = false
+min_time = 2000
+show_milliseconds = true
+show_notifications = false
+min_time_to_notify = 45_000
+format = "[ 祥$duration](color3) "
+
+[git_status]
+ahead = "ﲗ ${count}"
+behind = "ﲔ ${count}"
+diverged = "李 ${ahead_count} ${behind_count}"
+conflicted = "${count}"
+deleted = " [${count}](color3)"
+renamed = "﫦${count}"
+modified = "[  \\(${count}\\) ](color3)"
+staged = " [ ${count}](color3)"
+untracked = "  \\(${count}\\)"
+format = "([$all_status$ahead_behind](color3)) "
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch](color7)"
+
+[package]
+symbol =" "
+display_private = true
+version_format = "v${raw}"
+format = "[$symbol$version](color4)"
+
+#=== languages ===
+
+[nodejs]
+symbol = "  "
+format = "[$symbol($version)](color7)"
+
+[python]
+symbol = "  "
+pyenv_prefix = 'pyenv '
+python_binary = "python"
+format = '[$symbol$pyenv_prefix$version(\($virtualenv\))](color7)'
+
   '';
 }
