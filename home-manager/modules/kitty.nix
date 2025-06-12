@@ -2,6 +2,7 @@
 
 let
   kittyConfigPath = ".config/kitty/kitty.conf";
+  fishPath = "${pkgs.fish}/bin/fish";
 in {
   home.packages = with pkgs; [
   ];
@@ -16,9 +17,7 @@ in {
     # Shell
     #######################################
 
-    shell: /usr/bin/fish
-
-
+    shell: ${fishPath}
 
     ########################################
     # Font Settings

@@ -76,7 +76,6 @@ powershell_indicator = "_"
 bash_indicator = ""
 disabled= false
 
-
 [time]
 disabled = false
 time_format = "%T"
@@ -102,17 +101,6 @@ show_notifications = false
 min_time_to_notify = 45_000
 format = "[ 祥$duration](color3) "
 
-[git_status]
-ahead = "ﲗ ${count}"
-behind = "ﲔ ${count}"
-diverged = "李 ${ahead_count} ${behind_count}"
-conflicted = "${count}"
-deleted = " [${count}](color3)"
-renamed = "﫦${count}"
-modified = "[  \\(${count}\\) ](color3)"
-staged = " [ ${count}](color3)"
-untracked = "  \\(${count}\\)"
-format = "([$all_status$ahead_behind](color3)) "
 
 [git_branch]
 symbol = " "
@@ -121,7 +109,6 @@ format = "[$symbol$branch](color7)"
 [package]
 symbol =" "
 display_private = true
-version_format = "v${raw}"
 format = "[$symbol$version](color4)"
 
 #=== languages ===
@@ -135,6 +122,8 @@ symbol = "  "
 pyenv_prefix = 'pyenv '
 python_binary = "python"
 format = '[$symbol$pyenv_prefix$version(\($virtualenv\))](color7)'
+
+
 
   '';
 }

@@ -6,6 +6,9 @@ in {
   home.packages = with pkgs; [
   ];
 
+home.file.".config/home-manager/scripts/wallpaper.sh".source = ./scripts/wallpaper.sh;
+
+
   home.file.${i3ConfigPath}.text = ''
     ########################################
     # Load Pywal colors
@@ -21,6 +24,7 @@ in {
     gaps inner 10
     gaps outer 10
     smart_gaps on
+    default_border none
 
     ########################################
     # Workspace Bindings
@@ -31,7 +35,7 @@ in {
     set $ws4 "4: "
     set $ws5 "5: "
 
-    bindsym $mod+Return exec i3-sensible-terminal
+    bindsym $mod+Return exec kitty
     bindsym $mod+d exec dmenu_run
     bindsym $mod+Shift+q kill
     bindsym $mod+Shift+r restart
@@ -72,7 +76,7 @@ in {
   # Startup
   ##########################################
    exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080 
-   exec_always --nostartup-id /home/oli/.config/home-manager/scripts/wallpaper.sh
+   exec --no-startup-id /home/oli/.config/home-manager/scripts/wallpaper.sh
 
 
 # Set colors from Xresources

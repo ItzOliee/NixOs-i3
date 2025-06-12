@@ -14,6 +14,8 @@ in {
     # MISC
 
     # TERMINAL
+    kitty
+    yazi
     any-nix-shell
     fastfetch
     zip
@@ -21,21 +23,28 @@ in {
     unzip
     tree
     gnupg
+    fish
+    starship
 
     # DEVELOPMENT
     openjdk
-   default-python
-
+    default-python
+    git
+    jq
+    
     # SYSADMIN
 
     # OFFICE
-     firefox
-
+    firefox
+    neovim
+    vim
+    google-chrome
     # DEFAULT
     pavucontrol
     discord
     spotify
     blueman
+    feh   
 
     # GAMES
   ];

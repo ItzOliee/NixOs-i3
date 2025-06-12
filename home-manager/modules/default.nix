@@ -2,18 +2,25 @@
 
 {
   imports = [
-    # app
+    # theme
+    ./pywal
 
     # cli
 
     # shell
+    ./fish.nix
 
     # wm
     ./i3.nix
 
     # term
+    ./kitty.nix
+    ./fish.nix
+    ./bashrc.nix
+    ./starship.nix   
 
     # dev
+
 
     # font
 
