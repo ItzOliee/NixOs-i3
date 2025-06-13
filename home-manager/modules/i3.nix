@@ -26,6 +26,8 @@ home.file.".config/home-manager/scripts/wallpaper.sh".source = ./scripts/wallpap
     smart_gaps on
     default_border none
 
+for_window [class="Dunst"] floating enable
+
     ########################################
     # Workspace Bindings
     ########################################
@@ -77,7 +79,7 @@ home.file.".config/home-manager/scripts/wallpaper.sh".source = ./scripts/wallpap
   ##########################################
    exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080 
    exec --no-startup-id /home/oli/.config/home-manager/scripts/wallpaper.sh
-
+  exec --no-startup-id dunst
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use 

@@ -44,8 +44,9 @@ in {
     discord
     spotify
     blueman
-    feh   
-
+    feh 
+    dunst
+    libnotify
     # GAMES
   ];
 

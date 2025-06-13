@@ -18,9 +18,9 @@
     ./fish.nix
     ./bashrc.nix
     ./starship.nix   
-
-    # dev
-
+   
+   # notifications
+   ./dunst.nix
 
     # font
 
