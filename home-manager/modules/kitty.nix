@@ -9,9 +9,11 @@ in {
 
   home.file.${kittyConfigPath}.text = ''
     ########################################
-    # Load Pywal Colors
+    # Visual
     ########################################
     include ~/.cache/wal/colors-kitty.conf
+
+    background_opacity 0.1
 
     #######################################
     # Shell

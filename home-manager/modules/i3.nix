@@ -79,6 +79,9 @@ for_window [class="Dunst"] floating enable
   ##########################################
    exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080 
    exec --no-startup-id /home/oli/.config/home-manager/scripts/wallpaper.sh
+   exec --nostartupid picom --config ~/.config/picom/picom.conf
+
+
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use 

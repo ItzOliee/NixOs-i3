@@ -12,6 +12,7 @@
 
     # wm
     ./i3.nix
+    ./picom.nix
 
     # term
     ./kitty.nix

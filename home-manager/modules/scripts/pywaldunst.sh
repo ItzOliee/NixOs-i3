@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-# Source pywal colors (adjust path if needed)
+#!/bin/sh
 source ~/.cache/wal/colors.sh
 
 cat <<EOF
@@ -16,7 +15,10 @@ notification_limit = 5
 gap_size = 12
 padding = 12
 horizontal_padding = 20
-frame_width = 1
+frame_width = 2
+frame_color = "${color0:-#1e1e2e}"
+corner_radius = 10
+transparency = 10
 sort = no
 
 # Progress bar
@@ -24,9 +26,8 @@ progress_bar_frame_width = 0
 progress_bar_corner_radius = 3
 
 # Colors
-foreground = "#cdd1dc"
-frame_color = "#2d303c"
-highlight = "#2274d5, #82aad9"
+foreground = "${foreground:-#cdd1dc}"
+highlight = "${color4:-#2274d5}, ${color6:-#82aad9}"
 
 # Text
 font = Noto Sans CJK JP 10
@@ -37,21 +38,20 @@ vertical_alignment = center
 show_age_threshold = -1
 hide_duplicate_count = false
 
-
-
 [urgency_low]
-background = "${background:-#282828}"
+background = "${background:-#282828}AA"
 foreground = "${foreground:-#ebdbb2}"
 timeout = 10
 
 [urgency_normal]
-background = "${color3:-#3c3836}"
+background = "${color3:-#3c3836}AA"
 foreground = "${foreground:-#ebdbb2}"
 timeout = 10
 
 [urgency_critical]
-background = "${color1:-#cc241d}"
+background = "${color1:-#cc241d}DD"
 foreground = "${color7:-#fbf1c7}"
 timeout = 0
+
 EOF
 

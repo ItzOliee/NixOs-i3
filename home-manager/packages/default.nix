@@ -11,9 +11,11 @@ let
 
 in {
   home.packages = with pkgs; [
-    # MISC
 
-    # TERMINAL
+   # MISC
+     picom
+
+   # TERMINAL
     kitty
     yazi
     any-nix-shell
@@ -33,6 +35,8 @@ in {
     jq
     
     # SYSADMIN
+ 
+
 
     # OFFICE
     firefox
