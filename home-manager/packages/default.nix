@@ -5,6 +5,7 @@ let
   default-python = python3.withPackages (python-packages:
     with python-packages; [
       pip
+      i3ipc
     ]);
 
   nixpkgs.config.allowUnfreePredicate = true;
@@ -35,7 +36,6 @@ in {
     jq
     
     # SYSADMIN
- 
 
 
     # OFFICE
@@ -43,6 +43,9 @@ in {
     neovim
     vim
     google-chrome
+    
+
+
     # DEFAULT
     pavucontrol
     discord
@@ -51,6 +54,7 @@ in {
     feh 
     dunst
     libnotify
+    rofi
     # GAMES
   ];
 

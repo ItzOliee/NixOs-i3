@@ -9,7 +9,7 @@ in {
    home.file.${picomConfigPath}.text = ''
 
 # Backend
-backend = "glx";
+backend = "xrender";
 xrender-sync-fence = false
 use-damage=false
 
@@ -28,11 +28,15 @@ blur: {
 # Blur background of windows
 blur-background = true;
 blur-background-frame = true;
-blur-background-fixed = true;
+blur-background-fixed = false;
 
 # Rounded corners
 corner-radius = 10;
 round-borders = 1;
+rounded-corners-exclude = [
+];
+
+
 
 # Specify which windows to blur (optional; can blur all)
 blur-background-exclude = [

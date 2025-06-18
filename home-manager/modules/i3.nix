@@ -38,7 +38,7 @@ for_window [class="Dunst"] floating enable
     set $ws5 "5: "
 
     bindsym $mod+Return exec kitty
-    bindsym $mod+d exec dmenu_run
+    bindsym $mod+r exec rofi -show drun
     bindsym $mod+Shift+q kill
     bindsym $mod+Shift+r restart
     bindsym $mod+Shift+e exit
@@ -79,8 +79,8 @@ for_window [class="Dunst"] floating enable
   ##########################################
    exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080 
    exec --no-startup-id /home/oli/.config/home-manager/scripts/wallpaper.sh
-   exec --nostartupid picom --config ~/.config/picom/picom.conf
-
+   exec --no-startup-id picom --config ~/.config/picom/picom.conf
+   exec_always --no-startup-id /home/oli/.config/home-manager/scripts/autotiling.py
 
 
 # Set colors from Xresources
