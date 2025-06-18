@@ -10,87 +10,107 @@ in {
 
   home.file."${rofiConfigPath}".text = ''
     @theme "~/${rofiThemePath}"
+              
+
+* {
+    font: "Figtree 13";
+    g-spacing: 10px;
+    g-margin: 0;
+    b-radius: 8px;
+    g-padding: 8px;
+    wbg-color: #00000033; /* Fully transparent */
+    w-border: 2px solid; /* Cyan border */
+    w-border-color: #00FFFF; /* Cyan color */   
+    w-padding: 12px;
+     hl-color: #FFFFFFFF;
+    hlt-color: #000000FF;
+    alt-color: #111111FF;
+}
+
 
 configuration {
-	modi:				"drun";
-	font:				"Rubik 10";
-	show-icons:                     true;
-	icon-theme: 			"Reversal-dark";
-	display-drun: 			"";
-	drun-display-format:            "{name}";
-	sidebar-mode: 			false;
-}
-
-
-window {
-	border-radius:                  7px;
-	width:			    	50%;
-	padding: 			32px;
-}
-
-prompt {
-	background-color:		@background;
-	enabled:			true;
-	padding:			0.5% 32px 0% -0.5%;
-	font:				"Rubik 10";
-}
-
-entry {
-    	placeholder:			"Search";
-	background-color:               @background;
-    	placeholder-color:              @foreground;
-    	expand:                         true;
-    	padding:                        0.15% 0% 0% 0%;
-}
-
-inputbar {
-	children:			[ prompt, entry ];
-    	background-color:               @background;
-    	expand:                         false;
-    	border-radius:                  6px;
-    	margin:                         0%;
-    	padding:                        10px;
+    modi: "drun";
+    show-icons: true;
+    display-drun: "";
 }
 
 listview {
-    	columns:                        4;
-    	lines:	                        3;
-    	cycle:                          false;
-    	dynamic:                        true;
-    	layout:                         vertical;
+    columns: 1;
+    lines: 7;
+    fixed-height: true;
+    fixed-columns: true;
+    cycle: false;
+    scrollbar: false;
+    border: 0px solid;
+}
+
+window {
+    transparency: "real";
+    width: 450px;
+    border-radius: @b-radius;
+    background-color: @background;
+    border: @w-border;
+    border-color: @foreground;
+    padding: @w-padding;
+}
+
+prompt {
+    text-color: @foreground;
+}
+
+inputbar {
+    children: ["prompt", "entry"];
+    spacing: @g-spacing;
+}
+
+entry {
+    placeholder: "Search Apps";
+    text-color: @foreground;
+    placeholder-color: @background;
 }
 
 mainbox {
-    	children:                       [ inputbar, listview ];
-    	spacing:                       	2%;
-    	padding:                        2% 1% 2% 1%;
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    children: ["inputbar", "listview", "message"];
 }
 
 element {
-    	orientation:                    vertical;
-    	padding:                        2% 0% 2% 0%;
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    border: 0px solid;
+    border-radius: @b-radius;
+    border-color: @background;
+    background-color: transparent;
+    text-color: @foreground;
 }
 
-element-icon {
-    	size:                           48px;
-    	horizontal-align:	 	0.5;
+element normal.normal {
+	background-color: transparent;
+	text-color: @foreground;
 }
 
-element-text {
-    	expand:                         true;
-    	horizontal-align:               0.5;
-    	vertical-align:                 0.5;
-    	margin:                         0.5% 0.5% -0.5% 0.5%;
+element alternate.normal {
+	background-color: @background;
+	text-color: @foreground;
 }
 
-element-text, element-icon {
-	background-color:		inherit;
-	text-color:			inherit;
+element selected.active {
+	background-color: @background;
+	text-color: @foreground;
 }
 
-element selected {
-    	background-color:               @background;
-    	border-radius:                  6px;
+element selected.normal {
+	background-color: @background;
+	text-color: @foreground;
 }
+
+message {
+    background-color: red;
+    border: 0px solid;
+}
+
   '';
   }
