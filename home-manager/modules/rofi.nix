@@ -2,115 +2,104 @@
 
 let
   rofiConfigPath = ".config/rofi/config.rasi";
-  rofiThemePath = ".cache/wal/colors-rofi-dark.rasi";
+  rofiDefaultPath = ".config/rofi/themes/default.rasi";
 in {
   home.packages = with pkgs; [
     # Add necessary packages like rofi here
   ];
 
   home.file."${rofiConfigPath}".text = ''
-    @theme "~/${rofiThemePath}"
-              
+  @theme "~/.config/rofi/themes/nova.rasi"
+
+'';
+}
+
+   home.file."${rofiDefaultPath}".text = ''
+   @import "~/.cache/wal/colors-rofi-dark.rasi"
 
 * {
-    font: "Figtree 13";
-    g-spacing: 10px;
-    g-margin: 0;
-    b-radius: 8px;
-    g-padding: 8px;
-    wbg-color: #00000033; /* Fully transparent */
-    w-border: 2px solid; /* Cyan border */
-    w-border-color: #00FFFF; /* Cyan color */   
-    w-padding: 12px;
-     hl-color: #FFFFFFFF;
-    hlt-color: #000000FF;
-    alt-color: #111111FF;
-}
+    background-alt:              @selected-active-background; // Buttons background
+    selected:                    @selected-normal-background; // Button selected
+    active:                      @selected-urgent-background; // Window activated
+    urgent:                      @selected-normal-background; // When hovering the activated window (maybe more?)
 
+    text-selected:               @background;
+    text:                        @foreground;
 
-configuration {
-    modi: "drun";
-    show-icons: true;
-    display-drun: "";
-}
-
-listview {
-    columns: 1;
-    lines: 7;
-    fixed-height: true;
-    fixed-columns: true;
-    cycle: false;
-    scrollbar: false;
-    border: 0px solid;
+    shade-shadow:                white / 6%;
+    shade-bg:                    white / 12%;
+    shade-border:                white / 24%;
 }
 
 window {
-    transparency: "real";
-    width: 450px;
-    border-radius: @b-radius;
-    background-color: @background;
-    border: @w-border;
-    border-color: @foreground;
-    padding: @w-padding;
+    fullscreen:                  false;
+    transparency:                "real";
+    cursor:                      "default";
+    background-color:            black / 12%;
+    border:                      0px;
+    border-color:                @selected;
 }
 
-prompt {
-    text-color: @foreground;
-}
-
-inputbar {
-    children: ["prompt", "entry"];
-    spacing: @g-spacing;
-}
-
-entry {
-    placeholder: "Search Apps";
-    text-color: @foreground;
-    placeholder-color: @background;
-}
-
-mainbox {
-    spacing: @g-spacing;
-    margin: @g-margin;
-    padding: @g-padding;
-    children: ["inputbar", "listview", "message"];
-}
-
-element {
-    spacing: @g-spacing;
-    margin: @g-margin;
-    padding: @g-padding;
-    border: 0px solid;
-    border-radius: @b-radius;
-    border-color: @background;
-    background-color: transparent;
-    text-color: @foreground;
-}
-
-element normal.normal {
-	background-color: transparent;
-	text-color: @foreground;
-}
-
+/* Elements ----------------------------------------------------- */
+element normal.normal,
 element alternate.normal {
-	background-color: @background;
-	text-color: @foreground;
-}
-
-element selected.active {
-	background-color: @background;
-	text-color: @foreground;
+    background-color:            transparent;
+    text-color:                  @text;
 }
 
 element selected.normal {
-	background-color: @background;
-	text-color: @foreground;
+    background-color:            @shade-bg;
+    text-color:                  white;
+    border:                      1px solid;
+    border-color:                @selected;
 }
 
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/* Listview ---------------------------------------------------- */
+
+listview {
+  border:                        0px;
+}
+
+/* Scrollbar ---------------------------------------------------- */
+scrollbar {
+    margin:                      0px 4px;
+    handle-width:                8px;
+    handle-color:                white;
+    background-color:            @shade-shadow;
+    border-radius:               4px;
+}
+
+/* Message ------------------------------------------------------ */
 message {
-    background-color: red;
-    border: 0px solid;
+    background-color:            @shade-bg;
+    border:                      1px solid;
+    border-color:                transparent;
+    border-radius:               12px;
+    padding:                     24px;
+}
+error-message {
+    padding:                     100px;
+    border:                      0px solid;
+    border-radius:               0px;
+    background-color:            black / 10%;
+    text-color:                  @text;
+}
+textbox {
+    background-color:            transparent;
+    text-color:                  @text;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    highlight:                   none;
 }
 
-  '';
-  }
+'';
+}
