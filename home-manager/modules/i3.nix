@@ -57,22 +57,6 @@ for_window [class="Dunst"] floating enable
     ########################################
     # Bar
     ########################################
-    bar {
-      status_command i3status
-      position top
-
-      colors {
-        background $background
-        statusline $foreground
-        separator  $color8
-
-        focused_workspace  $color2 $color1 $foreground
-        active_workspace   $color4 $color4 $foreground
-        inactive_workspace $color0 $color0 $foreground
-        urgent_workspace   $color1 $color1 $foreground
-        binding_mode       $color3 $color3 $foreground
-      }
-    }
 
   ##########################################
   # Startup

@@ -55,6 +55,7 @@ in {
     dunst
     libnotify
     rofi
+    polybarFull
     # GAMES
   ];
 

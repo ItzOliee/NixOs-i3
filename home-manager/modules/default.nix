@@ -14,7 +14,6 @@
     ./i3.nix
     ./picom.nix
     ./rofi.nix
-
     # term
     ./kitty.nix
     ./fish.nix
