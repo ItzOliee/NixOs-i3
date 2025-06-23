@@ -1,12 +1,34 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
+let
+  # Custom SilentSDDM theme package
+  silentSddmTheme = pkgs.stdenv.mkDerivation {
+    pname = "silent-sddm-theme";
+    version = "1.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "uiriansan";
+      repo = "SilentSDDM";
+      rev = "main";  # Pin to a specific commit or tag if you want stable
+      sha256 = "sha256-1ssbpphvfky5l8d1p7g7yy4rlqjxvcp2gqk7wq6y5c4dxg7fgq08"; # Replace with actual hash from nix-prefetch-git
+    };
+
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/default
+      cp -r $src/themes/default/* $out/share/sddm/themes/default/
+    '';
+
+    meta = with pkgs.lib; {
+      description = "SilentSDDM default theme for SDDM";
+      homepage = "https://github.com/uiriansan/SilentSDDM";
+      license = licenses.mit;
+      maintainers = with maintainers; [ ];
+    };
+  };
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
@@ -17,16 +39,16 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
 
-  # Define Hostname
-  networking.hostName = "draconix"; 
+  # Hostname
+  networking.hostName = "draconix";
 
-  # Enable networking
+  # Networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  # Timezone
   time.timeZone = "Europe/London";
 
-  # Select internationalisation properties.
+  # Locale
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -41,55 +63,52 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Configure keymap in X11
-services.xserver = {
-  enable = true;
-  windowManager.i3.enable = true;
- displayManager.sddm.enable = true;
-    displayManager.defaultSession = "none+i3"; 
- };
+  # X11 and window manager + display manager
+  services.xserver = {
+    enable = true;
+    windowManager.i3.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.defaultSession = "none+i3";
+    displayManager.theme = "default";  # Set SDDM theme here
+  };
 
-  
-  #Enable Pipewire
+  # Pipewire
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true; # if not already enabled
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    # jack.enable = true; # Uncomment if needed
   };
 
-
-
-
-  # Configure console keymap
+  # Console keymap
   console.keyMap = "uk";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # User
   users.users.oli = {
     isNormalUser = true;
     description = "oli";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [firefox];
+    packages = with pkgs; [ firefox ];
   };
-
-  # Enable automatic login for the user.
- # services.getty.autologinUser = "oli";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # System packages
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    silentSddmTheme  # Add the SilentSDDM theme package here
   ];
 
- # System Version
-  system.stateVersion = "25.05";
+  # Activation script to copy theme files to /usr/share/sddm/themes
+  system.activationScripts.copySilentSddmTheme = {
+    text = ''
+      mkdir -p /usr/share/sddm/themes
+      cp -r ${silentSddmTheme}/share/sddm/themes/default /usr/share/sddm/themes/
+    '';
+  };
 
+  # System version
+  system.stateVersion = "25.05";
 }
