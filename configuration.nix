@@ -45,10 +45,9 @@
 services.xserver = {
   enable = true;
   windowManager.i3.enable = true;
-  };
-  services.displayManager = {
-    defaultSession = "none+i3";
-  };
+ displayManager.sddm.enable = true;
+    displayManager.defaultSession = "none+i3"; 
+ };
 
   
   #Enable Pipewire
@@ -77,7 +76,7 @@ services.xserver = {
   };
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "oli";
+ # services.getty.autologinUser = "oli";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
