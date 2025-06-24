@@ -37,9 +37,11 @@ in
     format = CPU %percentage:2%%
 
     [module/date]
-    type = internal/date
-    interval = 5  
-format =  %Y-%m-%d %H:%M:%S 
+    type = custom/script
+    exec = /home/oli/.config/home-manager/modules/Polybar/scripts/time.sh
+  #  click-right = /home/denis/.dotfiles/.config/polybar/custom/scripts/rofi-calendar-menu.sh
+    interval = 10
+
 
   '';
 

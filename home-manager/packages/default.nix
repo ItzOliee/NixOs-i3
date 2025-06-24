@@ -16,6 +16,7 @@ in {
    # MISC
      picom
 
+
    # TERMINAL
     kitty
     yazi

@@ -14,6 +14,10 @@ in {
     include ~/.cache/wal/colors-kitty.conf
 
     background_opacity 0.1
+    window_padding_width 5
+    window_margin_width 5
+    window_border_width 2px
+
 
     #######################################
     # Shell

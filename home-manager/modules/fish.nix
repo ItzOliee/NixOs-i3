@@ -21,8 +21,8 @@
       ########################################
       # Environment Variables
       ########################################
-      set -gx EDITOR nvim
-      set -gx VISUAL nvim
+      set -gx EDITOR 
+      set -gx VISUAL
       set -gx PAGER less
       set -gx BROWSER firefox
 
@@ -34,7 +34,7 @@
       ########################################
       # Pywal Colors
       ########################################
-      if test -e ~/.cache/wal/colors.fish
+      if test -f ~/.cache/wal/colors.fish
           source ~/.cache/wal/colors.fish
       end
 

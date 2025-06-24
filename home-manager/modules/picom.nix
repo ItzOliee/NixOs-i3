@@ -49,8 +49,8 @@ fade-in-step = 0.03;
 fade-out-step = 0.03;
 
 # Opacity (optional, for translucent inactive windows)
-inactive-opacity = 0.8;
-active-opacity = 0.9;
+inactive-opacity = 0.75;
+active-opacity = 0.8;
 
 # Enable
 use-dock-shadow = false;

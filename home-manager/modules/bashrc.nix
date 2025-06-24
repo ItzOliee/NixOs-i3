@@ -9,9 +9,15 @@ in {
 
   home.file.${bashrcPath}.text = ''
     ########################################
+    # Load pywal colors
+    ########################################
+    if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+      . "$HOME/.cache/wal/colors.sh"
+    fi
+
+    ########################################
     # Interactive Shell Exec
     ########################################
-    # If the shell is interactive, replace bash with fish shell
     case $- in
       *i*)
         exec ${pkgs.fish}/bin/fish

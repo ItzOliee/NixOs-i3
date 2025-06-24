@@ -14,7 +14,9 @@
     ./i3.nix
     ./picom.nix
     ./rofi.nix
-    # term
+    ./Polybar/polybar.nix   
+
+     # term
     ./kitty.nix
     ./fish.nix
     ./bashrc.nix
@@ -26,5 +28,7 @@
     # font
 
     # Keyboard Input Method / 日本語入力
-  ];
+
+
+ ];
 }
