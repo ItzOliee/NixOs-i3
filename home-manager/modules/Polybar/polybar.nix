@@ -1,124 +1,403 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
+
+# Created By @icanwalkonwater
+# Edited and ported to Nix by Th0rgal
 
 let
-  polybarConfigPath = ".config/polybar/config.ini";
-  polybarLaunchPath = ".config/polybar/launch.sh";
-in
-{
-  home.packages = with pkgs; [
-  ];
+  ac = "#1E88E5";
+  mf = "#383838";
 
-  # Polybar config file
-  home.file.${polybarConfigPath}.text = ''
-   
-   
-   [colors]
-    background = #1F1F1F
-    background-alt = #373B41
-    foreground = #FFFFFF
-    primary = #C5C8C6
-    secondary = #8ABEB7
-    alert = #A54242
-    disabled = #707880  
-  
+  bg = "#00000000";
+  fg = "#FFFFFF";
 
-    [bar/example]
-   
-    monitor = Virtual-1 
-    width = 960 
-    height = 32
-    offset-x = 480 
-    radius = 10
+  # Colored
+  primary = "#91ddff";
 
-    background = #88000000
-    foreground = #dfdfdf
-    
-    line-size = 4
-    line-color = #f00
-       
+  # Dark
+  secondary = "#141228";
 
-    font-0 = Hack Nerd Font:size=12;3
-   
-    padding-left = 8
-    padding-right = 8
-  
-    module-margin-left = 1
-    module-margin-right = 2
- 
+  # Colored (light)
+  tertiary = "#65b2ff";
 
-    modules-left = i3 xwindow
-    modules-right = cpu
-    modules-center = date
+  # white
+  quaternary = "#ecf0f1";
 
-    wm-restack = i3
+  # middle gray
+  quinternary = "#20203d";
 
-    [settings]
-    screenchange-reload = true
-   
-   [module/i3]
-   type = internal/i3
-   format = <label-state> <label-mode>
-   index-sort = true
-   wrapping-scroll = false
-   strip-wsnumbers = true
-   pin-workspaces = false
-   enable-click = true
-   enable-scroll = true
-   show-empty = true
+  # Red
+  urgency = "#e74c3c";
 
+in {
+  services.polybar = {
+    enable = true;
 
-   label-mode-padding = 2
-   label-mode-foreground = #000000
-   label-mode-background = #5e81ac  
+    package = pkgs.polybar.override {
+      alsaSupport = true;
+     i3Support = true;
+    };
 
-   label-focused = %name%
-   label-focused-background = #88c0d0 
-   label-focused-underline = #81a1c1  
-   label-focused-foreground = #2e3440  
-   label-focused-padding = 2
+    script = "polybar -q -r top & polybar -q -r bottom &";
 
-   label-unfocused = %name%
-   label-unfocused-background = #3b4252  
-   label-unfocused-foreground = #d8dee9  
-   label-unfocused-padding = 2
+    config = {
+      "global/wm" = {
+        margin-bottom = 0;
+        margin-top = 0;
+      };
 
-   label-visible = %name%
-   label-visible-background = #434c5e  
-   label-visible-underline = #81a1c1
-   label-visible-foreground = #eceff4
-   label-visible-padding = 2
+      #====================BARS====================#
 
-   label-urgent = %name%
-   label-urgent-background = #bf616a 
-   label-urgent-foreground = #ffffff 
-   label-urgent-padding = 2
- 
-    [module/cpu]
-    type = internal/cpu
-    interval = 2
-    format = CPU %percentage:2%%
+      "bar/top" = {
+        bottom = false;
+        fixed-center = true;
 
-    [module/date]
-    type = custom/script
-    exec = /home/oli/.config/home-manager/modules/Polybar/scripts/time.sh
-    click-right = /home/oli/.config/home-manager/Polybar/scripts/rofi-calendar-menu.sh
-    interval = 10
+        width = "100%";
+        height = 19;
+        offset-x = "1%";
 
+        scroll-up = "i3.next";
+        scroll-down = "i3.prev";
 
+        background = bg;
+        foreground = fg;
 
-[module/xwindow]
-type = internal/xwindow
-label = %{T2}%title:0:40:...%%{T-}
+        radius = 0;
 
+        font-0 = "Hack Nerd Font:size=12;3";
+        font-1 = "Hack Nerd Font:style=Bold:size=12;3";
 
-  '';
+        modules-left = " powermenu ddlS ddrT i3 dulT";
+        modules-center = "title";
+        modules-right = "durT audio ddlT date ";
 
-  # Polybar launch script
-  home.file.${polybarLaunchPath}.text = ''
-    #!/usr/bin/env bash
-    killall -q polybar
-    while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-    polybar example &
-  '';
+        locale = "en_US.UTF-8";
+      };
 
+      "bar/bottom" = {
+        bottom = true;
+        fixed-center = true;
+
+        width = "100%";
+        height = 19;
+
+        offset-x = "1%";
+
+        background = bg;
+        foreground = fg;
+
+        radius-top = 0;
+
+        tray-position = "left";
+        tray-detached = false;
+        tray-maxsize = 15;
+        tray-background = primary;
+        tray-offset-x = -19;
+        tray-offset-y = 0;
+        tray-padding = 5;
+        tray-scale = 1;
+        padding = 0;
+
+        font-0 = "Hack Nerd Font:size=12;2";
+        font-1 = "Hack Nerd Font:style=Bold:size=12;2";
+
+        modules-left = "powermenu";
+
+        modules-right = "ddrS cpu dulS ddrT memory dulT ddrP battery";
+
+        locale = "en_US.UTF-8";
+      };
+
+      "settings" = {
+        throttle-output = 5;
+        throttle-output-for = 10;
+        throttle-input-for = 30;
+
+        screenchange-reload = true;
+
+        compositing-background = "source";
+        compositing-foreground = "over";
+        compositing-overline = "over";
+        comppositing-underline = "over";
+        compositing-border = "over";
+
+        pseudo-transparency = "false";
+      };
+
+      #--------------------MODULES--------------------"
+
+      "module/audio" = {
+        type = "internal/alsa";
+
+        format-volume = "墳 VOL <label-volume>";
+        format-volume-padding = 1;
+        format-volume-foreground = secondary;
+        format-volume-background = tertiary;
+        label-volume = "%percentage%%";
+
+        format-muted = "<label-muted>";
+        format-muted-padding = 1;
+        format-muted-foreground = secondary;
+        format-muted-background = tertiary;
+        format-muted-prefix = "婢 ";
+        format-muted-prefix-foreground = urgency;
+        format-muted-overline = bg;
+
+        label-muted = "VOL Muted";
+      };
+
+      "module/cpu" = {
+        type = "internal/cpu";
+
+        interval = "0.5";
+
+        format = " <label>";
+        format-foreground = quaternary;
+        format-background = secondary;
+        format-padding = 1;
+
+        label = "CPU %percentage%%";
+      };
+
+      "module/date" = {
+        type = "internal/date";
+
+        interval = "1.0";
+
+        time = "%H:%M:%S";
+        time-alt = "%Y-%m-%d%";
+
+        format = "<label>";
+        format-padding = 4;
+        format-foreground = fg;
+
+        label = "%time%";
+      };
+
+      "module/i3" = {
+        type = "internal/i3";
+        pin-workspaces = false;
+        strip-wsnumbers = true;
+        format = "<label-state> <label-mode>";
+        format-background = tertiary;
+
+        ws-icon-0 = "1;";
+        ws-icon-1 = "2;";
+        ws-icon-2 = "3;﬏";
+        ws-icon-3 = "4;";
+        ws-icon-4 = "5;";
+        ws-icon-5 = "6;";
+        ws-icon-6 = "7;";
+        ws-icon-7 = "8;";
+        ws-icon-8 = "9;";
+        ws-icon-9 = "10;";
+
+        label-mode = "%mode%";
+        label-mode-padding = 1;
+
+        label-unfocused = "%icon%";
+        label-unfocused-foreground = quinternary;
+        label-unfocused-padding = 1;
+
+        label-focused = "%index% %icon%";
+        label-focused-font = 2;
+        label-focused-foreground = secondary;
+        label-focused-padding = 1;
+
+        label-visible = "%icon%";
+        label-visible-padding = 1;
+
+        label-urgent = "%index%";
+        label-urgent-foreground = urgency;
+        label-urgent-padding = 1;
+
+        label-separator = "";
+      };
+
+      "module/title" = {
+        type = "internal/xwindow";
+        format = "<label>";
+        format-foreground = secondary;
+        label = "%title%";
+        label-maxlen = 70;
+      };
+
+      "module/memory" = {
+        type = "internal/memory";
+
+        interval = 3;
+
+        format = " <label>";
+        format-background = tertiary;
+        format-foreground = secondary;
+        format-padding = 1;
+
+        label = "RAM %percentage_used%%";
+      };
+
+      "module/powermenu" = {
+        type = "custom/menu";
+        expand-right = true;
+
+        format = "<label-toggle> <menu>";
+        format-background = secondary;
+        format-padding = 3;
+
+        label-open = "";
+        label-close = "";
+        label-separator = "  ";
+        
+
+        menu-0-0 = " Suspend";
+        menu-0-0-exec = "systemctl suspend";
+        menu-0-1 = " Reboot";
+        menu-0-1-exec = "v";
+        menu-0-2 = " Shutdown";
+        menu-0-2-exec = "systemctl poweroff";
+      };
+
+      #--------------------SOLID TRANSITIONS--------------------#
+
+      "module/dsPT" = {
+        type = "custom/text";
+        content = "";
+        content-background = primary;
+        content-foreground = tertiary;
+      };
+
+      "module/dsTS" = {
+        type = "custom/text";
+        content = "";
+        content-background = tertiary;
+        content-foreground = secondary;
+      };
+
+      "module/dsST" = {
+        type = "custom/text";
+        content = "";
+        content-background = secondary;
+        content-foreground = tertiary;
+      };
+
+      "module/daPT" = {
+        type = "custom/text";
+        content = "";
+        content-background = primary;
+        content-foreground = tertiary;
+      };
+
+      "module/daTP" = {
+        type = "custom/text";
+        content = "";
+        content-background = tertiary;
+        content-foreground = primary;
+      };
+
+      "module/daST" = {
+        type = "custom/text";
+        content = "";
+        content-background = secondary;
+        content-foreground = tertiary;
+      };
+
+      "module/daTS" = {
+        type = "custom/text";
+        content = "";
+        content-background = secondary;
+        content-foreground = primary;
+      };
+
+      "module/daSP" = {
+        type = "custom/text";
+        content = "";
+        content-background = secondary;
+        content-foreground = primary;
+      };
+
+      #--------------------GAPS TRANSITIONS--------------------#
+
+      "module/dulT" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = tertiary;
+        content-background = bg;
+      };
+
+      "module/ddrT" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = tertiary;
+        content-background = bg;
+      };
+
+      "module/ddlT" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = tertiary;
+        content-background = bg;
+      };
+
+      "module/durT" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = tertiary;
+        content-background = bg;
+      };
+
+      "module/ddlP" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = primary;
+        content-background = bg;
+      };
+
+      "module/durP" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = primary;
+        content-background = bg;
+      };
+
+      "module/dulP" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = primary;
+        content-background = bg;
+      };
+
+      "module/ddrP" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = primary;
+        content-background = bg;
+      };
+
+      "module/dulS" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = secondary;
+        content-background = bg;
+      };
+
+      "module/ddlS" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = secondary;
+        content-background = bg;
+      };
+
+      "module/durS" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = secondary;
+        content-background = bg;
+      };
+
+      "module/ddrS" = {
+        type = "custom/text";
+        content = "";
+        content-foreground = secondary;
+        content-background = bg;
+      };
+    };
+  };
 }
