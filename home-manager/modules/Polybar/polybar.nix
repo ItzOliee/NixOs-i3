@@ -28,59 +28,50 @@ in
     background = #88000000
     foreground = #dfdfdf
     font-0 = Hack Nerd Font:size=12;3
-    modules-left = i3
+    padding-left = 1
+    padding-right = 8
+    module-margin-left = 1
+    modules-left = i3 xwindow
     modules-right = cpu
     modules-center = date
 
     [settings]
     screenchange-reload = true
-    
-     [module/i3]
-     type = internal/i3
-     format = <label-state>
+   
+   [module/i3]
+   type = internal/i3
+   format = <label-state> <label-mode>
+   index-sort = true
+   wrapping-scroll = false
+   strip-wsnumbers = true
+   pin-workspaces = true
 
-     # Appearance of focused workspace
-     label-focused = %icon% %name%
-     label-focused-padding = 2
-     label-focused-background = #5e81ac
-     label-focused-foreground = #ffffff
+   label-mode-padding = 2
+   label-mode-foreground = #000000
+   label-mode-background = #5e81ac  
 
-     # Appearance of unfocused workspace
-     label-unfocused = %icon% %name%
-     label-unfocused-padding = 2
-     label-unfocused-foreground = #d8dee9
+   label-focused = %name%
+   label-focused-background = #88c0d0 
+   label-focused-underline = #81a1c1  
+   label-focused-foreground = #2e3440  
+   label-focused-padding = 2
 
-     # Appearance of visible but not focused workspace
-     label-visible = %icon% %name%
-     label-visible-padding = 2
-     label-visible-background = #88c0d0
-     label-visible-foreground = #2e3440
+   label-unfocused = %name%
+   label-unfocused-background = #3b4252  
+   label-unfocused-foreground = #d8dee9  
+   label-unfocused-padding = 2
 
-     # Appearance of urgent workspace
-     label-urgent = %icon% %name%
-     label-urgent-padding = 2
-     label-urgent-background = #bf616a
-     label-urgent-foreground = #ffffff
+   label-visible = %name%
+   label-visible-background = #434c5e  
+   label-visible-underline = #81a1c1
+   label-visible-foreground = #eceff4
+   label-visible-padding = 2
 
-     # Optional behavior
-     enable-click = true
-     enable-scroll = false
-     wrapping-scroll = false
-
-     # Automatically remove empty workspaces (optional)
-     strip-wsnumbers = false
-     index-sort = true
-     pin-workspaces = true
-
-     # Icons (requires FontAwesome or Nerd Fonts)
-     ws-icon-0 = 1;
-     ws-icon-1 = 2;
-     ws-icon-2 = 3;
-     ws-icon-3 = 4;
-     ws-icon-4 = 5;
-     ws-icon-default = 
-
-  
+   label-urgent = %name%
+   label-urgent-background = #bf616a 
+   label-urgent-foreground = #ffffff 
+   label-urgent-padding = 2
+ 
     [module/cpu]
     type = internal/cpu
     interval = 2
@@ -91,6 +82,12 @@ in
     exec = /home/oli/.config/home-manager/modules/Polybar/scripts/time.sh
     click-right = /home/oli/.config/home-manager/Polybar/scripts/rofi-calendar-menu.sh
     interval = 10
+
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %{T2}%title:0:40:...%%{T-}
 
 
   '';
