@@ -73,40 +73,6 @@ in {
         locale = "en_US.UTF-8";
       };
 
-      "bar/bottom" = {
-        bottom = true;
-        fixed-center = true;
-
-        width = "100%";
-        height = 19;
-
-        offset-x = "1%";
-
-        background = bg;
-        foreground = fg;
-
-        radius-top = 0;
-
-        tray-position = "left";
-        tray-detached = false;
-        tray-maxsize = 15;
-        tray-background = primary;
-        tray-offset-x = -19;
-        tray-offset-y = 0;
-        tray-padding = 5;
-        tray-scale = 1;
-        padding = 0;
-
-        font-0 = "Hack Nerd Font:size=12;2";
-        font-1 = "Hack Nerd Font:style=Bold:size=12;2";
-
-        modules-left = "powermenu";
-
-        modules-right = "ddrS cpu dulS ddrT memory dulT ddrP battery";
-
-        locale = "en_US.UTF-8";
-      };
-
       "settings" = {
         throttle-output = 5;
         throttle-output-for = 10;
@@ -400,4 +366,4 @@ in {
       };
     };
   };
-}
+
