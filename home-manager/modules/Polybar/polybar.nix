@@ -23,17 +23,34 @@ in
   
 
     [bar/example]
-    width = 100%
-    height = 30
+   
+    monitor = Virtual-1 
+    width = 960 
+    height = 32
+    offset-x = 480 
+    radius = 10
+
     background = #88000000
     foreground = #dfdfdf
+    
+    line-size = 4
+    line-color = #f00
+       
+
     font-0 = Hack Nerd Font:size=12;3
-    padding-left = 1
+   
+    padding-left = 8
     padding-right = 8
+  
     module-margin-left = 1
+    module-margin-right = 2
+ 
+
     modules-left = i3 xwindow
     modules-right = cpu
     modules-center = date
+
+    wm-restack = i3
 
     [settings]
     screenchange-reload = true
@@ -44,7 +61,11 @@ in
    index-sort = true
    wrapping-scroll = false
    strip-wsnumbers = true
-   pin-workspaces = true
+   pin-workspaces = false
+   enable-click = true
+   enable-scroll = true
+   show-empty = true
+
 
    label-mode-padding = 2
    label-mode-foreground = #000000
