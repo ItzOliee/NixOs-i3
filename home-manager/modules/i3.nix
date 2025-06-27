@@ -63,7 +63,7 @@ for_window [class="Dunst"] floating enable
    exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080 
    exec --no-startup-id /home/oli/.config/home-manager/modules/scripts/wallpaper.sh
    exec --no-startup-id picom --config ~/.config/picom/picom.conf
-   exec_always --no-startup-id /home/oli/.config/home-manager/scripts/autotiling.py
+   exec_always --no-startup-id /home/oli/.config/home-manager/modules/scripts/autotiling.py
 
 
 # Set colors from Xresources
