@@ -6,19 +6,20 @@ disabled   = {{COLOR8}}
 
 [settings]
 screenchange-reload = true
-pseudo-transparency = true
+pseudo-transparency = false
 
 [module/date]
 type = internal/date
 interval = 60
 date = "%a %b %d"
-label = "%{F-} %date%"
+label = "%{F{{COLOR6}}}%{F-} %date%"
 
 [module/time]
 type = internal/date
 interval = 1
 time = "%H:%M:%S"
-label = "%{F-} %time%"
+label = "%{F{{COLOR6}}}%{F-} %time%"
+
 
 [module/powermenu]
 type = custom/menu
@@ -41,10 +42,9 @@ menu-0-2-exec = systemctl poweroff
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:40:...%
+label = "%{F{{COLOR7}}}%title:0:40:...%{F-}"
 label-maxlen = 40
 label-ellipsis = true
-format-foreground = {{COLOR7}}
 
 [module/i3]
 type = internal/i3
@@ -66,7 +66,7 @@ label-unfocused = %icon%
 label-unfocused-foreground = {{COLOR8}}
 label-unfocused-padding = 1
 
-label-focused = %index% %icon%
+label-focused = %icon%
 label-focused-font = 2
 label-focused-foreground = {{COLOR6}}
 label-focused-padding = 1
@@ -74,7 +74,7 @@ label-focused-padding = 1
 label-visible = %icon%
 label-visible-padding = 1
 
-label-urgent = %index%
+label-urgent = %icon%
 label-urgent-foreground = {{COLOR1}}
 label-urgent-padding = 1
 
@@ -99,8 +99,8 @@ click-left = ~/.config/home-manager/modules/Polybar/picom-toggle.sh toggle
 width = 100%
 height = 30pt
 radius = 20
-background = #282c3000
-foreground = {{COLOR7}}
+background = {{COLOR6}}
+foreground = #000000
 line-size = 3pt
 border-size = 5pt
 border-color = #00000000
