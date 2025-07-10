@@ -10,9 +10,6 @@ color1=$(jq -r '.colors.color1' "$colors_file")
 color6=$(jq -r '.colors.color6' "$colors_file")
 color7=$(jq -r '.colors.color7' "$colors_file")
 color8=$(jq -r '.colors.color8' "$colors_file")
-foreground=$(jq -r '.special.foreground' "$colors_file")
-background=$(jq -r '.special.background' "$colors_file")
-
 
 # Replace placeholders in template config
 sed \
