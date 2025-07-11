@@ -8,10 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./nvidia.nix
     ];
 
-   nvidia.enable = true;
 
   nix.settings = {
     download-buffer-size = 33554432;
@@ -95,9 +93,6 @@ fonts.packages = [
   pkgs.nerd-fonts.hack
 ];
 
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
 
 
  # System Version

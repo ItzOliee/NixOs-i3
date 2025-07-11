@@ -1,33 +1,42 @@
 { config, lib, pkgs, ... }:
-
 {
-  options = {
-    nvidia.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable NVIDIA proprietary driver and configuration.";
-    };
+
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
   };
 
-  config = lib.mkIf config.nvidia.enable {
-    # Use the NVIDIA proprietary driver
-    services.xserver.videoDrivers = [ "nvidia" ];
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
 
-    hardware.nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      open = false;  # Proprietary driver needed for RTX 3080
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
+  hardware.nvidia = {
 
-    # Enable OpenGL support
-    hardware.opengl.enable = true;
+    # Modesetting is required.
+    modesetting.enable = true;
 
-    # Optional: include CUDA toolkit
-    environment.systemPackages = with pkgs; [
-      cudaPackages.cudatoolkit
-      pkgs.linuxPackages.nvidia_x11.settings
-    ];
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
+    powerManagement.enable = true;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    open = true;
+
+    # Enable the Nvidia settings menu,
+	# accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 }
