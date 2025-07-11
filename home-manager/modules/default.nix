@@ -4,6 +4,7 @@
   imports = [
     # theme
     ./pywal
+    ./themecord.nix
 
     # cli
 
@@ -13,9 +14,10 @@
     # wm
     ./i3.nix
     ./picom.nix
-    ./rofi.nix
+    ./rofi_launcher.nix
     ./Polybar/polybar.nix   
-
+    ./firefox.nix
+    ./pywalfox.nix
      # term
     ./kitty.nix
     ./fish.nix

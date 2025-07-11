@@ -47,7 +47,7 @@ color8="#908478"
 
 [memory_usage]
 disabled = false
-symbol = " "
+symbol = ""
 threshold = -1
 format = " [$symbol$ram](color1)"
 

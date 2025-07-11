@@ -6,7 +6,7 @@ if [ -n "$BG" ]; then
     feh --bg-scale "$BG" &&
 
     # Run pywal on the selected wallpaper with saturation, no change to background color
-    wal -i "$BG" --saturate 0.7 -n -b 010101 &&
+    wal -i "$BG" --backend wal --cols16 darken --saturate 0.7  -n  &&
 
     # Run your existing scripts that apply pywal colors to starship and dunst
     ~/.config/home-manager/modules/scripts/starship_pywal.sh &&
@@ -21,7 +21,12 @@ if [ -n "$BG" ]; then
     # Restart polybar
     pkill polybar
     # Launch your Polybar (adjust as needed)
-    ~/.config/home-manager/modules/Polybar/launch_polybar.sh &
+    ~/.config/home-manager/modules/Polybar/launch-polybar.sh &
+
+
+    # Update Discord Colours
+    themecord -p
+
 
     # Notify with dunstify
     dunstify "New Wallpaper Set" "$(basename "$BG")"

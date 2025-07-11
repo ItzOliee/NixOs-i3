@@ -13,19 +13,8 @@ in {
     "${chromeDir}/userChrome.css".text = ''
 
 
-    :root {
-  --accent: var(--pywal-color7);
-  --main-bg: var(--pywal-background);
-  --dark-bg: var(--pywal-color0);
-  --light-bg: var(--pywal-color1);
-
-  --primary: var(--pywal-color7);
-  --primary-alt: var(--pywal-color6);
-  --primary-grad: linear-gradient(90deg, var(--primary), var(--primary-alt));
-
-  --toolbar-bgcolor: var(--main-bg) !important;
-  --lwt-sidebar-background-color: var(--dark-bg) !important;
-  --lwt-sidebar-text-color: var(--pywal-foreground, rgba(255, 255, 255, 0.5));
+:root {
+  --primary-grad: linear-gradient(90deg, var(--pywal-color7), var(--pywal-color6));
 }
 
 * {
@@ -56,7 +45,7 @@ element {
 }
 
 #nav-bar-customization-target {
-  background-color: var(--main-bg) !important;
+  background-color: var(--pywal-background) !important;
   -moz-appearance: none !important;
   background-image: none !important;
   border: none !important;
@@ -69,7 +58,7 @@ element {
 #sidebar-box,
 #tabbrowser-tabs,
 #TabsToolBar {
-  background-color: var(--main-bg) !important;
+  background-color: var(--pywal-background) !important;
   -moz-appearance: none !important;
   background-image: none !important;
   border: none !important;
@@ -81,7 +70,7 @@ element {
 }
 
 #TabsToolbar .tabbrowser-tab[selected] {
-  color: var(--main-bg) !important;
+  color: var(--pywal-background) !important;
 }
 
 #TabsToolbar .tabbrowser-tab {
@@ -93,12 +82,12 @@ element {
 }
 
 .tab-background {
-  background-color: var(--main-bg) !important;
+  background-color: var(--pywal-background) !important;
   margin: 12px !important;
   margin-right: 0px !important;
   border-radius: 10px !important;
   color: var(--pywal-foreground) !important;
-  border: 6px solid var(--main-bg) !important;
+  border: 6px solid var(--pywal-background) !important;
   transition: all .2s !important;
 }
 
@@ -108,14 +97,14 @@ element {
 }
 
 .tabbrowser-tab:hover .tab-background {
-  background-color: var(--dark-bg) !important;
-  border-color: var(--dark-bg) !important;
+  background-color: var(--pywal-color0) !important;
+  border-color: var(--pywal-color0) !important;
 }
 
 .tab-background[selected="true"] {
   background: var(--primary-grad) !important;
-  border: 0px solid var(--main-bg) !important;
-  color: var(--main-bg) !important;
+  border: 0px solid var(--pywal-background) !important;
+  color: var(--pywal-background) !important;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, .2);
 }
 
@@ -182,11 +171,11 @@ toolbarbutton.bookmark-item:not(.subviewbutton, [disabled="true"], [open]):hover
 #tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover:active,
 toolbarbutton.bookmark-item:hover:active:not(.subviewbutton, [disabled="true"]),
 .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active) > .toolbarbutton-icon {
-  background: var(--dark-bg) !important;
+  background: var(--pywal-color0) !important;
 }
 
 #PanelUI-button {
-  background-color: var(--main-bg) !important;
+  background-color: var(--pywal-background) !important;
   border-image-source: none !important;
   border-inline-start: 0px !important;
   margin-inline-start: 0px !important;
@@ -194,7 +183,7 @@ toolbarbutton.bookmark-item:hover:active:not(.subviewbutton, [disabled="true"]),
 }
 
 #urlbar-results {
-  background-color: var(--main-bg) !important;
+  background-color: var(--pywal-background) !important;
   border-radius: 10px !important;
 }
 
@@ -220,8 +209,8 @@ toolbarbutton.bookmark-item:hover:active:not(.subviewbutton, [disabled="true"]),
 
 #tabbrowser-tabpanels {
   background-color: white !important;
-}
-    
+}   
+ 
 
    '';
   };

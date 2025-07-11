@@ -28,13 +28,8 @@ in {
 for_window [class="Dunst"] floating enable
 
     ########################################
-    # Workspace Bindings
+    # KeyBindings
     ########################################
-    set $ws1 "1: "
-    set $ws2 "2: "
-    set $ws3 "3: "
-    set $ws4 "4: "
-    set $ws5 "5: "
 
     bindsym $mod+Return exec kitty
     bindsym $mod+r exec rofi -show drun
@@ -54,8 +49,19 @@ for_window [class="Dunst"] floating enable
     bindsym $mod+l focus right
 
     ########################################
-    # Bar
+    # Workspaces
     ########################################
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
 
   ##########################################
   # Startup

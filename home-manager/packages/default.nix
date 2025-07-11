@@ -29,13 +29,13 @@ in {
     gnupg
     fish
     starship
-
+    htop
     # DEVELOPMENT
     openjdk
     default-python
     git
     jq
-    
+    nodejs 
     # SYSADMIN
 
 
@@ -44,19 +44,21 @@ in {
     neovim
     vim
     google-chrome
-    
-
+    pywalfox-native
 
     # DEFAULT
     pavucontrol
-    discord
+    vesktop
     spotify
     blueman
     feh 
     dunst
     libnotify
     rofi
-    # GAMES
+    zenity   
+    bc
+    ffmpeg
+     # GAMES
   ];
 
 

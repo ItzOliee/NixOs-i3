@@ -34,14 +34,14 @@ blur-background-fixed = false;
 corner-radius = 10;
 round-borders = 1;
 rounded-corners-exclude = [
-"class_g = 'Polybar'"
 ];
 
 
 
 # Specify which windows to blur (optional; can blur all)
 blur-background-exclude = [
- # "window_type = 'desktop'"
+  "class_g = 'Polybar'",
+  "window_type = 'desktop'"
 ];
 
 # Fading (optional)

@@ -1,5 +1,6 @@
 [colors]
-foreground = {{COLOR7}}
+foreground = {{FOREGROUND}}
+background = {{BACKGROUND}}
 secondary  = {{COLOR6}}
 alert      = {{COLOR1}}
 disabled   = {{COLOR8}}
@@ -12,13 +13,13 @@ pseudo-transparency = false
 type = internal/date
 interval = 60
 date = "%a %b %d"
-label = "%{F{{COLOR6}}}%{F-} %date%"
+label = "%{F{{COLOR2}}}%{F-} %date%"
 
 [module/time]
 type = internal/date
 interval = 1
 time = "%H:%M:%S"
-label = "%{F{{COLOR6}}}%{F-} %time%"
+label = "%{F{{COLOR2}}}%{F-} %time%"
 
 
 [module/powermenu]
@@ -26,7 +27,7 @@ type = custom/menu
 expand-right = true
 
 format = <label-toggle> <menu>
-format-foreground = {{COLOR6}}
+format-foreground = {{COLOR2}}
 format-padding = 1
 
 label-open = 
@@ -42,7 +43,7 @@ menu-0-2-exec = systemctl poweroff
 
 [module/xwindow]
 type = internal/xwindow
-label = "%{F{{COLOR7}}}%title:0:40:...%{F-}"
+label = "%{F{{FOREGROUND}}}%title:0:40:...%{F-}"
 label-maxlen = 40
 label-ellipsis = true
 
@@ -51,7 +52,7 @@ type = internal/i3
 pin-workspaces = true
 strip-wsnumbers = true
 format = <label-state> <label-mode>
-format-foreground = {{COLOR6}}
+format-foreground = {{COLOR2}}
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
@@ -63,30 +64,30 @@ label-mode = %mode%
 label-mode-padding = 1
 
 label-unfocused = %icon%
-label-unfocused-foreground = {{COLOR8}}
+label-unfocused-foreground = {{COLOR2}}
 label-unfocused-padding = 1
 
 label-focused = %icon%
 label-focused-font = 2
-label-focused-foreground = {{COLOR6}}
+label-focused-foreground = {{COLOR2}}
 label-focused-padding = 1
 
 label-visible = %icon%
 label-visible-padding = 1
 
 label-urgent = %icon%
-label-urgent-foreground = {{COLOR1}}
+label-urgent-foreground = {{COLOR2}}
 label-urgent-padding = 1
 
 [module/memory]
 type = internal/memory
 interval = 2
-label = %{A1:sh -c "kitty -e htop" &:}%{F{{COLOR6}}}%{F-} %percentage_used%%%{A}
+label = %{A1:sh -c "kitty -e htop" &:}%{F{{COLOR2}}}%{F-} %percentage_used%%%{A}
 
 [module/cpu]
 type = internal/cpu
 interval = 0.5
-label = %{A1:sh -c "kitty -e htop" &:}%{F{{COLOR6}}}%{F-} %percentage%%%{A}
+label = %{A1:sh -c "kitty -e htop" &:}%{F{{COLOR2}}}%{F-} %percentage%%%{A}
 
 [module/picom-toggle]
 type = custom/script
@@ -99,8 +100,8 @@ click-left = ~/.config/home-manager/modules/Polybar/picom-toggle.sh toggle
 width = 100%
 height = 30pt
 radius = 20
-background = {{COLOR7}}
-foreground = #000000
+background = {{BACKGROUND}}
+foreground = {{FOREGROUND}}
 line-size = 3pt
 border-size = 5pt
 border-color = #00000000
@@ -108,7 +109,7 @@ padding-left = 4
 padding-right = 4
 module-margin = 2
 separator = " // "
-separator-foreground = {{COLOR8}}
+separator-foreground = {{COLOR6}}
 
 font-0 = "Hack Nerd Font:size=12;2.5"
 
